@@ -1,4 +1,4 @@
-# Android Flows in kotlin
+# Flows in Android Kotlin
 In programming we have some scenarios where we have stream of data e.g video Streaming, FM radio etc there we use flows.
 Flows is used in situation where sources like remote server, local db continously sends data. To support streams of data kotlin offers two approaches
 channels and flows
