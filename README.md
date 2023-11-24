@@ -11,3 +11,7 @@ Cold Streams are preferred over hot streams because in hot stream Resources are 
 continously produce data.
 Each flow can have multiple consumer 
 Flow will be cancelled if there is not consumer or we can cancel using other approches like cancelling the coroutine.
+### Events in Flows
+onStart{} - This event block is trigger only once when the flow the start.
+onEach{} - This event block is trigger before each element emitted by flow.
+onComplete{} - This event block is triggered when the flow produced by the producer function completes or collection completed.
