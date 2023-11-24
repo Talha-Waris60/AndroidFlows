@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Flow
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,31 +43,19 @@ class MainActivity : AppCompatActivity() {
 
         //  Consumer - 1
         GlobalScope.launch(Dispatchers.Main) {
-            producer()
-                // Events
-                .onStart {
-                    Log.d(APP_TAG, "Events -> Starting out")
-                    binding.countTv.text = ""
-                    binding.countTv.text = "Starting out"
-                }
-                .onCompletion {
-                    Log.d(APP_TAG, "Events -> Completed")
-                    binding.countTv.text = ""
-                    binding.countTv.text = "Completed"
-                }
-                .onEach {
-                    Log.d(APP_TAG, "Events -> About to emit - $it")
-                    binding.countTv.text = ""
-                    binding.countTv.text = "About to emit"
-                    delay(1000)
-                }
-                .collect {
-                    // Clear the previous text
-                    binding.countTv.text = ""
-                    binding.countTv.text = it.toString()
-                    delay(5000)
-                    Log.d(APP_TAG, "Consumer 1 -> ${it.toString()}")
-                }
+            val time = measureTimeMillis {
+                producer()
+                    // Use buffering strategy
+                    .buffer(3)
+                    .collect {
+                        delay(2000) // takes to process the data
+                        // Clear the previous text
+                        binding.countTv.text = ""
+                        binding.countTv.text = it.toString()
+                        Log.d(APP_TAG, "Consumer 1 -> ${it.toString()}")
+                    }
+            }
+            Log.d(APP_TAG, "Time - $time")
         }
 
     }
