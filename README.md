@@ -15,3 +15,7 @@ Flow will be cancelled if there is not consumer or we can cancel using other app
 onStart{} - This event block is trigger only once when the flow the start.
 onEach{} - This event block is trigger before each element emitted by flow.
 onComplete{} - This event block is triggered when the flow produced by the producer function completes or collection completed.
+
+### Buffering Strategy
+Buffering strategy - buffer(CAPACITY) is used to handle the scenarios when the producer emits elements at a rate that might be faster than the consumer can process.  
+Buffering allows the consumer to collect elements at its own pace, reducing the risk of losing elements due to a fast producer and a slow consumer. Capacity in buffering refer to how much element you want to store in buffering for process. 
