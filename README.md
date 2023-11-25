@@ -20,6 +20,6 @@ Buffering enables the consumer to collect elements at its own pace or speed, red
 The capacity in buffering refers to the maximum number of elements you want to store in the buffer for processing
 ### Flow Context Preservation ( flowon() )
 When dealing with flows in Kotlin, it's important to consider the thread or context in which the flow is emitted and collected.
-Gernally flows preserver the context - (coroutine scope) in which they are emitting and expect to collect the elements in same context but you can switch the context on the base of your scenario and requirements. 
+Generally flows preserve the context - (coroutine scope) in which they are emitting and expect to collect the elements in the same context. However, you can switch the context based on your scenario and requirements.
 If you emit elements on one thread (e.g., in the background or IO thread), and you try to collect or perform operations on those elements on a different thread (e.g., the main thread), you might run into issues, including potential crashes.
 To address this, you can use the flowOn operator to explicitly specify the thread or dispatcher where certain parts of the flow should execute. 
