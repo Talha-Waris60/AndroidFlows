@@ -23,4 +23,6 @@ When dealing with flows in Kotlin, it's important to consider the thread or cont
 Generally flows preserve the context - (coroutine scope) in which they are emitting and expect to collect the elements in the same context. However, you can switch the context based on your scenario and requirements.
 If you emit elements on one thread (e.g., in the background or IO thread), and you try to collect or perform operations on those elements on a different thread (e.g., the main thread), you might run into issues, including potential crashes.
 To address this, you can use the flowOn operator to explicitly specify the thread or dispatcher where certain parts of the flow should execute. 
-### Shared Flow
+### Shared Flows
+Shared Flows are hot flows. Each shared flow has multiple consumers, and each consumer gets the same flow object. For example, in a movie theater, if a movie starts at 3:00 o'clock, every person in the theater who arrives at 3:00 will consume the same data. However, if a person arrives at 3:30, they will start consuming the data from that time onward, missing the data that was emitted before their arrival. Flow object will shared among all consumers
+### State Flow
