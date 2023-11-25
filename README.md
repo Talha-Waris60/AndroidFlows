@@ -1,5 +1,8 @@
 # Flows in Android Kotlin
 In programming, we have scenarios where there is a stream of data, for example, video streaming, FM radio, etc. Flows are used in situations where sources like remote servers or local databases continuously send data.
+Flows has 2 terminologies
+1) Producer - which produce the data
+2) consumer - which consume the data 
 ## To support streams of data kotlin offers two approaches
 ### 1) Channels are hot
 The producer continously generates data regardless of whether a consumer is actively observing or not.In this scenario, 
