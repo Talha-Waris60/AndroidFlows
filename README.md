@@ -24,5 +24,6 @@ Generally flows preserve the context - (coroutine scope) in which they are emitt
 If you emit elements on one thread (e.g., in the background or IO thread), and you try to collect or perform operations on those elements on a different thread (e.g., the main thread), you might run into issues, including potential crashes.
 To address this, you can use the flowOn operator to explicitly specify the thread or dispatcher where certain parts of the flow should execute. 
 ### Shared Flows
-Shared Flows are hot flows. Each shared flow has multiple consumers, and each consumer gets the same flow object. For example, in a movie theater, if a movie starts at 3:00 o'clock, every person in the theater who arrives at 3:00 will consume the same data. However, if a person arrives at 3:30, they will start consuming the data from that time onward, missing the data that was emitted before their arrival. Flow object will shared among all consumers
+Shared Flows are hot flows. Each shared flow has multiple consumers, and each consumer gets the same flow object. For example, in a movie theater, if a movie starts at 3:00 o'clock, every person in the theater who arrives at 3:00 will consume the same data. However, if a person arrives at 3:30, they will start consuming the data from that time onward, missing the data that was emitted before their arrival. Flow object will shared among all consumers.
+Replay feature in shareIn allows you to specify how many previous elements should be replayed to new collectors when they subscribe to the shared flow.
 ### State Flow
