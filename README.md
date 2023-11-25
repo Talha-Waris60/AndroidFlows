@@ -10,7 +10,7 @@ Cold Streams are preferred over hot streams because in hot stream, resources are
 continously produce data
 Each flow can have multiple consumer.
 A Flow will be cancelled if there is no consumers, or we can cancel it using other approches, like cancelling the coroutine.
-### Events in Flows
+### Events In Flows
 onStart{} - This event block is triggered only once when the flow starts.
 onEach{} -  This event block is triggered before each element emitted by the flow.
 onComplete{} - This event block is triggered when the flow, produced by the producer function, completes or when the collection is completed.
@@ -18,3 +18,8 @@ onComplete{} - This event block is triggered when the flow, produced by the prod
 Buffering strategy - buffer(CAPACITY) is used to handle the scenarios when the producer emits elements at a rate that might be faster than the consumer can process.  
 Buffering enables the consumer to collect elements at its own pace or speed, reducing the risk of losing elements in scenarios where the producer is fast and the consumer is slow.
 The capacity in buffering refers to the maximum number of elements you want to store in the buffer for processing
+### Flow Context Preservation ( flowon() )
+When dealing with flows in Kotlin, it's important to consider the thread or context in which the flow is emitted and collected.
+Gernally flows preserver the context - (coroutine scope) in which they are emitting and expect to collect the elements in same context but you can switch the context on the base of your scenario and requirements. 
+If you emit elements on one thread (e.g., in the background or IO thread), and you try to collect or perform operations on those elements on a different thread (e.g., the main thread), you might run into issues, including potential crashes.
+To address this, you can use the flowOn operator to explicitly specify the thread or dispatcher where certain parts of the flow should execute. 
