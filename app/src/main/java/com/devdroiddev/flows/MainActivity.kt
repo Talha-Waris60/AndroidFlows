@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.flow
@@ -41,42 +42,26 @@ class MainActivity : AppCompatActivity() {
         // Consumer - 1
         GlobalScope.launch(Dispatchers.Main) {
             val result = producer()
-            Log.d(APP_TAG, "${result.toString()}")
+            delay(9000)
             result.collect {
-                delay(500)
                     // Clear the previous text
                     binding.countTv.text = ""
                     binding.countTv.text = it.toString()
                     Log.d(APP_TAG, "Consumer 1 - $it")
                 }
         }
-
-        // Consumer - 2
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = producer()
-            delay(2000)
-            result.collect{
-                binding.countTv.text = ""
-                binding.countTv.text = it.toString()
-                Log.d(APP_TAG, "Consumer 2 - $it")
-            }
-        }
     }
 
-    private fun producer() : MutableSharedFlow<Int> {
+    private fun producer(): MutableSharedFlow<Int> {
 
-        /*  Share Flow are of 2 types - MutableSharedFlow,   SharedFlow
-        MutableSharedFlow - It can be changed
-        SharedFlow - Read only
-         */
-        val mutableSharedFlow = MutableSharedFlow<Int>(replay = 1)
+        val mutableStateFlow = MutableStateFlow(10)
         GlobalScope.launch {
-            val list = listOf<Int>(1, 2, 3, 4, 5)
-            list.forEach {
-                mutableSharedFlow.emit(it)
-            }
+            delay(1000)
+            mutableStateFlow.emit(20)
+            delay(1000)
+            mutableStateFlow.emit(30)
         }
-        return mutableSharedFlow
+        return mutableStateFlow
     }
 }
 
