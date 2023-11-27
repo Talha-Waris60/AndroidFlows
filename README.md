@@ -1,5 +1,6 @@
 # Flows in Android Kotlin
-In programming, we have scenarios where there is a stream of data, for example, video streaming, FM radio, etc. Flows are used in situations where sources like remote servers or local databases continuously send data. There are three entities involved in streams of data:
+In programming, we have scenarios where there is a stream of data, for example, video streaming, FM radio, etc. Flows are used in situations where sources like remote servers or local databases continuously send data. 
+* There are three entities involved in streams of data:
 1) Producer - which produce the data
 2) consumer - which consume the data 
 ## To support streams of data kotlin offers two approaches
