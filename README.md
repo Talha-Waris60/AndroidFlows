@@ -9,9 +9,9 @@ The producer continously generates data regardless of whether a consumer is acti
 streams are considered hot, meaning that produced data is not re-emitted.
 ### 2) Flow are mostly Cold
 Producer does not produce data until there is no any consumer, In flows every consumer get data from the start no matter when consumer is attached.
-Cold Streams are preferred over hot streams because in hot stream, resources are wasted, and we have to manually close the producer since it
-continously produce data
-Each flow can have multiple consumer, every consumer will get independent flow object and get data from starting 
+Cold Streams are preferred over hot streams, because in hot stream, resources are wasted, and we have to manually close the producer since it
+continously produce data.
+Each flow can have multiple consumer, every consumer will get independent flow object and get data from starting. 
 A Flow will be cancelled if there is no consumers, or we can cancel it using other approches, like cancelling the coroutine.
 ### Events In Flows
 onStart{} - This event block is triggered only once when the flow starts.
