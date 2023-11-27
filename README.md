@@ -1,8 +1,8 @@
 # Flows in Android Kotlin
 In programming, we have scenarios where there is a stream of data, for example, video streaming, FM radio, etc. Flows are used in situations where sources like remote servers or local databases continuously send data. There are three entities involved in streams of data:
 ##### 1) Producer - A producer produces data that is added to the stream.
-2) (Optional) Intermediaries - It can modify each value emitted into the stream.
-3) consumer -  Consumer consumes the values from the stream.
+##### 2) (Optional) Intermediaries - It can modify each value emitted into the stream.
+##### 3) consumer -  Consumer consumes the values from the stream.
 ## To support streams of data kotlin offers two approaches
 ### 1) Channels are hot
 The producer continously generates data regardless of whether a consumer is actively observing or not.In this scenario, 
