@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         // Flow is executing on main thread
         // Consumer - 1
-  /*      GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main) {
             val result = producer()
             delay(9000)
             result.collect {
@@ -49,15 +49,10 @@ class MainActivity : AppCompatActivity() {
                     binding.countTv.text = it.toString()
                     Log.d(APP_TAG, "Consumer 1 - $it")
                 }
-        }*/
-
-        binding.crashBtn.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-            Log.d("Hello", "New Line")
         }
     }
 
-/*    private fun producer(): MutableSharedFlow<Int> {
+    private fun producer(): MutableSharedFlow<Int> {
 
         val mutableStateFlow = MutableStateFlow(10)
         GlobalScope.launch {
@@ -67,6 +62,6 @@ class MainActivity : AppCompatActivity() {
             mutableStateFlow.emit(30)
         }
         return mutableStateFlow
-    }*/
+    }
 }
 
